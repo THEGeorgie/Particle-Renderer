@@ -1,3 +1,3 @@
 # Particle-Renderer
 
-A si,ple particle renderer using SDL
+A simple particle renderer using SDL
