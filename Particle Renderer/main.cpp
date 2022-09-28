@@ -18,9 +18,18 @@ int main(int argc, char* args[]) {
 
 	while(true) {
 		// Update particles
+		
 		// Draw particles
-		// Check for events
+		for (int y = 0; y < Screen::screenH; y++) {
+			for (int x = 0; x < Screen::screenW; x++) {
+				screen.setPixle(x, y, 120, 0, 255);
+			}
+		}
 
+		screen.setPixle(400, 300, 255, 255, 255);
+
+		// Check for events
+		screen.update();
 
 		if (screen.processEvents() == false) {
 			break;

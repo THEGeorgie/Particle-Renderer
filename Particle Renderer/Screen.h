@@ -23,6 +23,8 @@ namespace gogi {
 		bool init();
 		bool processEvents();
 		void close();
+		void update();
+		void setPixle(int x, int y, Uint8 red, Uint8 green, Uint8 blue);
 	};
 }
 #endif // !SCREEN_H_

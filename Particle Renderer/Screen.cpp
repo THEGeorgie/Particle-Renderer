@@ -45,22 +45,37 @@ namespace gogi {
 			return false;
 		}
 
-		Uint32* buffer = new Uint32[screenW * screenH];
+		m_buffer = new Uint32[screenW * screenH];
 
-		memset(buffer, 0, screenW * screenH * sizeof(Uint32));
-
-		for (int i = 0; i < screenW * screenH; i++) {
-			buffer[i] = 0xFFFF0000;
-		}
-
-
-		SDL_UpdateTexture(m_texture, NULL, buffer, screenW * sizeof(Uint32));
-		SDL_RenderClear(m_rendere);
-		SDL_RenderCopy(m_rendere, m_texture, NULL, NULL);
-		SDL_RenderPresent(m_rendere);
+		memset(m_buffer, 0, screenW * screenH * sizeof(Uint32));
 
 		return true;
 	}
+
+	void Screen::setPixle(int x, int y, Uint8 red, Uint8 green, Uint8 blue) {
+
+		Uint32 color = 0;
+
+		color += red;
+		color <<= 8;
+		color += green;
+		color <<= 8;
+		color += blue;
+		color <<= 8;
+		color += 0xFF;
+
+		m_buffer[(y * screenW) + x] = color;
+
+	}
+
+
+	void Screen::update() {
+		SDL_UpdateTexture(m_texture, NULL, m_buffer, screenW * sizeof(Uint32));
+		SDL_RenderClear(m_rendere);
+		SDL_RenderCopy(m_rendere, m_texture, NULL, NULL);
+		SDL_RenderPresent(m_rendere);
+	}
+
 	bool Screen::processEvents() {
 		SDL_Event event;
 
@@ -72,6 +87,7 @@ namespace gogi {
 
 		return true;
 	}
+
 	void Screen::close() {
 
 		SDL_DestroyRenderer(m_rendere);
@@ -82,5 +98,4 @@ namespace gogi {
 		delete[] m_buffer;
 		
 	}
-
 }
