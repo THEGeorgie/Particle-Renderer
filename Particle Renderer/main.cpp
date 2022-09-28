@@ -1,15 +1,18 @@
 #include <SDL.h>
 #include <stdio.h>
 #include <iostream> 
+#include "Screen.h"
+using namespace gogi;
 using namespace std;
 
 
 int main(int argc, char* args[]) {
 
+	Screen screen;
 	
-	
-
-	
+	if (screen.init() == false) {
+		cout << "Intialising failed" << endl;
+	}
 
 	bool quit = false;
 	SDL_Event event;
@@ -27,13 +30,9 @@ int main(int argc, char* args[]) {
 			}
 		}
 	}
-	
-	SDL_DestroyRenderer(rendere);
-	SDL_DestroyTexture(texture);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
 
-	delete[] buffer;
+	screen.close();
+	
 	return 0;
 }
 
