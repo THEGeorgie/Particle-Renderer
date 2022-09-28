@@ -14,21 +14,18 @@ int main(int argc, char* args[]) {
 		cout << "Intialising failed" << endl;
 	}
 
-	bool quit = false;
-	SDL_Event event;
+	
 
-	while(!quit) {
+	while(true) {
 		// Update particles
 		// Draw particles
 		// Check for events
 
 
-
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-				quit = true;
-			}
+		if (screen.processEvents() == false) {
+			break;
 		}
+		
 	}
 
 	screen.close();
